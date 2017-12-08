@@ -107,7 +107,7 @@ champ.CNA <- function(intensity=myLoad$intensity,
 		for(g in 1:length(groups))
 		{
 		
-			data_group=intsqnlogratio[,which(pheno == groups[g])]
+			data_group=intsqnlogratio[,colnames(intensity)[which(pheno == groups[g])]]
 			ints_group=ints[,which(pheno == groups[g])]
 			row.names(ints_group)=row.names(ints)
 	
