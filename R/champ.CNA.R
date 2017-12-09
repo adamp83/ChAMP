@@ -121,6 +121,7 @@ champ.CNA <- function(intensity=myLoad$intensity,
 	
             innerplot <- function(ints,group.freq,g)
             {
+                ints$CHR <- as.numeric(as.character(ints$CHR))
                 ints = ints[order(ints$CHR,ints$MAPINFO),]
                 labels_chr <- data.matrix(summary(as.factor(ints$CHR)))
                 test1<- data.frame(labels_chr,row.names(labels_chr) )
@@ -128,10 +129,12 @@ champ.CNA <- function(intensity=myLoad$intensity,
                 colnames(test) = c("chr")
                 colnames(test1) = c("count","chr")
                 F1 <- merge(test,test1, by="chr", sort=T)
+                F1 <- F1[order(as.numeric(as.character(F1$chr))),]
                 for(i in 2:length(row.names(F1))){F1[i,2] = F1[i-1,2] + F1[i,2] ; }
                 F1$label <- NULL ; F1[1,3] <- F1[1,2] / 2 ;	
                 for (i in 2:length(row.names(F1))){ F1[i,3] <- (F1[i,2]+F1[i-1,2])/2; }
 	
+                group.freq <- group.freq[order(as.numeric(group.freq$chrom)),]
                 y1=group.freq$gain
                 y2=group.freq$loss
 
